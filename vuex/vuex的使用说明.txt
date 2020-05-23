@@ -1,0 +1,13 @@
+一、state相当于date，里面用于存储数据
+二、mutations相当于methods方法，不能进行异步操作
+三、actions可以进行异步操作
+四、getters相当于computed
+五、module分割模块包含(state、mutational、getters、actions)
+六、模块化分离
+
+1、vuex的基本使用：
+   调用vuex里面的$store.state.xxx(表示store下的index.js里面的state的内容)
+2、getters的用法：
+   $store.getters.xxx(xxx表示getters下取得名字)
+3、使用常量替代 Mutation 事件类型
+4、通常情况下，Vuex要求我们Mutation中的方法必须是同步方法
