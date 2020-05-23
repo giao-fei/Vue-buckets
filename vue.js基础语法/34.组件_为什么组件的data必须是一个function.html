@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>组件_为什么组件的data必须是一个function</title>
+<script src="Vue包/vue-2.4.0.js"></script>
+</head>
+<body>
+  <div id="app">
+	  <counter></counter>
+  <hr>
+	  <counter></counter>
+  <hr>
+	  <counter></counter>
+  </div>
+  
+  <template id="tmp1">
+	<div>
+	  <input type="button" value="+1" @click="increment">
+	  <h3>{{count}}</h3>
+	</div>
+  </template>
+<script>
+	
+//   var dataObj = { count:0 }	
+  // 这是一个计数器的组件，身上有个按钮，让 data 中的 count 值 +1	
+  Vue.component('counter',{
+	 template: '#tmp1',
+	     data: function(){
+//	       return dataObj
+		   return { count:0 }
+   },
+	 methods:{
+	   increment(){
+		   this.count++
+	   }
+	 }
+})	
+	
+  // 创建 Vue 实例，得到 VieModel
+  var vm =new Vue({
+	  el: '#app',
+	  data:{},
+	  method:{}
+  })
+</script>
+</body>
+</html>

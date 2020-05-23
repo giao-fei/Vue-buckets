@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册组件语法糖</title>
+<script src="../js/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+       <com1></com1>
+       <com2></com2>
+    </div>
+<script>
+    // 1、注册全局组件语法糖
+    Vue.component("com1",{
+        template: `
+        <div>
+           <h3>hello world</h3>
+        </div>
+        `
+    })
+
+    // 创建 Vue 实例
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods:{},
+        // 2、注册局部组件语法糖
+        components: {
+           "com2": {
+               template: 
+                 `
+                <div>
+                  <h3>I am fine, thanks</h3>
+                  <p>you too</p>
+                </div>
+                 `              
+           }
+        }
+    })
+</script>
+</body>
+</html>

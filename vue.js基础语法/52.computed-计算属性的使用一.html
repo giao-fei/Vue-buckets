@@ -1,0 +1,42 @@
+·<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>computer-计算机属性的使用和3个特点</title>
+	<script src="js/vue-2.4.0.js"></script>
+	<script src="js/vue-resource.min.js"></script>
+	</head>
+	<body>
+	    <div id="app">
+	    	<input type="text" v-model="firstname"> +
+	    	<input type="text" v-model="middlename"> +
+	    	<input type="text" v-model="lastname"> =
+	    	<input type="text" v-model="fullname">
+	    	<!-- <p>{{ fullname }}</p>
+            <p>{{ fullname }}</p>
+            <p>{{ fullname }}</p> -->
+	    </div>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+			  firstname: '',
+			  middlename: '',
+			  lastname: '',
+			},
+			methods:{},
+		   
+			// 注意1：计算属性，在引用的时候，一定不要参加（）去调用，直接把它 当作 普通 属性去使用就好了
+			// 注意2：只要 计算属性，这个 function 内部，所用到的 任何 data 中的数据发送了变化，就会立即重新计算 这个 计算属性的值
+			// 注意3：计算属性的求值结果，会被缓存起来，方便下次直接使用；如果 计算属性方法中，所以来的任何数据，都没有发生过变化，则，不会重新对 计算属性求值
+			computed:{ /** 在 computed 中，可以定义一些 属性 **/
+			   fullname(){
+			   	  return this.firstname + '-' + this.middlename + '-' + this.lastname
+			   }
+			
+			}
+		});
+		
+	</script>
+	</body>
+</html>

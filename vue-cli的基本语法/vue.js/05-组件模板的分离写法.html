@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件模板的分离写法</title>
+<script src="../js/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+       <com1></com1>
+       <com2></com2>
+    </div>
+    <!-- script标签，注意：类型必须是text/x-template -->
+    <script type="text/x-template" id="tem2">
+       <div>
+         <h2>I'm fine, thanks</h2>
+       </div>
+    </script>
+    <!-- 2、template标签 -->
+    <template id="tem1">
+       <div>
+          hello world
+       </div>
+    </template>
+<script>
+    // 注册全局组件语法糖 
+    Vue.component("com1",{
+        template: "#tem1"
+    })
+
+    // 创建 Vue 实例
+    var vm = new Vue({
+        el: '#app',
+        data:{},
+        // 注册局部组件语法糖
+        components: {
+            com2: {
+                template: "#tem2",
+            }
+        }
+    })
+</script>
+</body>
+</html>

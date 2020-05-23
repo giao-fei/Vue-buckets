@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>solt(插槽的基本使用)</title>
+<script src="../js/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <com></com>
+        <com><span>hello world</span></com>
+        <com></com>
+    </div>
+    <template id="tmp">
+        <div>
+           <slot><h2>how old are you</h2></slot>
+        </div>
+    </template>
+<script>
+    var com = {
+        template: "#tmp"
+    }
+     
+    // 创建 view 实例 --》父组件
+    var vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
+        components: {
+            com
+        }
+    })
+</script>
+</body>
+</html>

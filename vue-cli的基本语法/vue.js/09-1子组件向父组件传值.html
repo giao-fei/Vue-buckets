@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>子组件向父组件传值</title>
+<script src="../js/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+       <com @item-click="cpnClick"></com>
+       <p ref="msg">{{mes}}</p>
+    </div>
+    <template id="tmp">
+      <div>
+       <button v-for="item in city" @click="btn(item)">{{item.name}}</button>        
+    </div>
+    </template>
+   
+<script>
+    
+    var com = {
+        template: "#tmp",
+        data(){
+            return {
+                city: [
+                    {name: "上海", weather: 6},
+                    {name: "北京", weather: 8},
+                    {name: "天津", weather: 10},
+                    {name: "重庆", weather: 20}
+                ],
+            }  
+        },
+        methods: {
+            btn(item){
+                this.$emit('item-click', item)
+            },
+        }
+    }
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            mes: 'I am fine ,&nbsp; thank you',
+            
+        },
+        methods: {
+            cpnClick(item){                
+                var item = JSON.stringify(item)
+                this.$refs.msg.innerText = item
+                // console.log(item)                      
+            }
+        },
+        components: {
+            com
+        }
+    })
+</script>
+</body>
+</html>

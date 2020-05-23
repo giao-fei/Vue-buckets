@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件计数器</title>
+    <script src="../js/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+       <com></com>
+       <com></com>
+    </div>
+    <template id="tmp">
+      <div>
+       <h2>当前数为：{{counter}} </h2>
+       <input type="button" @click="increment" value="+"> 
+       <input type="button" @click="decrement" value="-"> 
+      </div>
+    </template>    
+<script>
+    // var obj = {counter:0}
+    // 注册全局组件语法糖
+    Vue.component('com',{
+        template: '#tmp',
+        data(){
+            // return obj
+            return { counter: 0 }
+        },
+        methods: {
+            increment() {
+                this.counter++
+            },
+            decrement() {
+                this.counter--
+            }
+        }
+
+    })
+
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+        el: '#app',
+        data:{},
+    })
+</script>
+</body>
+</html>

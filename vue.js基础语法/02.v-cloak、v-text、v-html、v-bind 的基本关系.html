@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="Vue包/vue-2.4.0.js"></script>
+<style>
+	[v-cloak] {
+		display: none;
+	}
+</style>	
+</head>
+<body>
+ <div id="app">
+	<!--使用 v-cloak 能够解决 插值表达式闪烁的问题 -->
+ 	<p v-cloak>{{ msg }}</p>
+	<h4 v-text="msg"></h4>
+	<!-- 默认 v-text 是没有闪烁问题 -->
+	<!-- v-text会覆盖元素中原本的内容，但是 插值表达式 只会替换自己的这个占位符，不会把整个元素的内容清空 -->
+	 
+	<div>{{msg2}}</div>
+	<div v-text="msg2"></div> 
+	<div v-html="msg2">12223</div>
+	<p>{{ gao.name }} {{ gao.age }}</p>
+	<p>{{ Array[0] }}</p>
+	<!-- v-bind 是 Vue 中，提供的用于绑定属性的指令 -->
+	<!-- <input type="button" value="按钮" v-bind:title="mytitle + '123' "> -->
+	<!-- 注意：v-bind：指令可以被简写为 :要绑定的属性 -->
+    <!-- v-bind 中，可以写合法的JS表达式 -->
+    <!-- Vue 中提供了 v-on: 事件绑定机制 -->
+	<input type="button" value="按钮" :title="mytitle + '456' ">
+	
+ </div>
+<script>
+var vm = new Vue({
+	el:'#app',
+	data:{ 
+		   msg:'123',
+		   msg2:'<h1>Hello World</h1>',
+		   mytitle:'这是一个自己定义的title',
+           gao: {
+			  name: 'giao',
+			  age: 18
+		   },
+		   Array: ['华中地区','华南地区','华北地区','华东地区'] 
+	},
+	method:{
+		  
+	}    
+});	
+	
+	
+
+	
+	
+	
+</script>
+</body>
+</html>
