@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>复习_父子组件之间的传值</title>
+    <script src="js/vue-2.4.0.js"></script>
+	</head>
+	<body>
+	    <div id="app">
+	       <com1 v-bind:parentmsg="msg" @func="getMsgFormSon"></com1>
+	    </div>
+	    
+	    <template id="tmp1">
+	      <div>
+	       	 <h1>这是子元素 --- {{ parentmsg }} </h1>
+	         <input type="button" value="向父组件传递消息" @click="sendMsg">
+	      </div>
+	    </template>
+    <script>
+    	
+    	var com1 = {
+    	    template:'#tmp1',
+    	    data(){
+    	      return{
+    	      	msg: 'Hello World'
+    	      }
+    	    },
+    	    props: ['parentmsg'],
+    		methods:{
+    		   sendMsg(){
+    		   	  this.$emit('func',this.msg)
+    		   }
+    		}
+    	}
+    	
+    	// 创建 Vue 实例，得到 ViewModel
+    	var vm = new Vue({
+    		el: '#app',
+    		data: {
+    		  msg: '这是父组件中数据',
+    		  msgFormSon: ''
+    		},
+    		methods:{
+    		  getMsgFormSon(data){
+    		   this.msgFormSon = data
+    		   document.write(this.msgFormSon)
+    		  }
+    		},
+    		components:{
+    		   com1
+    		}
+    	});
+    </script>
+	</body>
+</html>

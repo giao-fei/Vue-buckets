@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue中全局过滤器的基本使用</title>
+<script src="Vue包/vue-2.4.0.js"></script>
+</head>
+<body>
+   <div id="app">
+   <!-- <p>{{ msg | msgFormat }}</p> -->
+   <!-- <p>{{ msg | msgFormat('邪恶') }}</p>-->
+   <p>{{ msg | msgFormat('邪恶' , '123') | test }}</p>
+   </div>
+<script>
+   // 定义一个 vue 全局的过滤器，名字叫做 msgFormat
+//   Vue.filter('msgFormat',function(msg){
+     Vue.filter('msgFormat',function(msg , arg , arg2){
+	   // 字符串的 replace 方法，第一个参数，除了可写一个 字符串之外，还可以定义iyge正则
+//	   return msg.replace(/单纯/g,'朴素')
+//	   return msg.replace(/单纯/g, arg)
+	   return msg.replace(/单纯/g, arg + arg2)
+   });
+	
+   Vue.filter('test', function(msg){
+	   
+       return msg + '======='
+	   
+   })	
+ 
+	
+   // 创建 Vue 实例，的到 ViewModel
+   var vm = new Vue({
+	   el: '#app',
+	   data: {
+		 msg: '许多年前，你也曾经是个单纯的少年，许多年后，你依旧是个单纯的骚年。' 
+	   },
+	   methods:{
+		   
+	   }
+   });
+   	
+</script>
+</body>
+</html>

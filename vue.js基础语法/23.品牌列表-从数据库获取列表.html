@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>品牌列表-从数据库获取列表</title>
+<script src="Vue包/vue-2.4.0.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="Vue包/vue-resource.min.js"></script>
+</head>
+<body>
+  <div id="app">
+     
+	<div class="panel panel-primary">  
+	    <div class="panel-heading">
+		  <h3 class="panel-title">添加品牌</h3>	
+		</div>
+	    <div class="panel-body form-inline">
+
+		  <label>
+			Name:
+			<input type="text" v-model="name" class="form-control">
+		  </label>
+		  <input type="button" value="添加" @click="add" class="btn btn-primary">
+		</div>
+    </div>		
+	  
+	<table class="table table-bordered table-hover table-atriped">
+	  <thead>
+		<tr>
+		  <th>Id</th>
+		  <th>Name</th>
+		  <th>Ctime</th>
+		  <th>Operation</th>
+		</tr>
+	  </thead>	  
+	  <tbody>
+		<tr v-for="item in list" :key="item.id">
+		  <td>{{item.id}}</td>
+		  <td>{{item.name}}</td>
+		  <td>{{item.ctime}}</td>
+		  <td>
+			  <a href="">删除</a>
+		  </td>
+		</tr>
+	  </tbody>	  
+    </table>	  
+  </div>
+<script>
+  var vm = new Vue({
+	  el: '#app',
+	  data: {
+		name: '',
+		list: [ // 存放所有的品牌列表
+		  { id: 1, name: '五菱宏光', ctime: new Date() },
+		  { id: 2, name: '众泰', ctime: new Date() },
+		  
+		]  
+	  },
+	  created(){ // 当 vm 实例的 data 和 methods 初始化完毕后，vm实例会自动执行created 这个生命周期函数
+		  this.getAllList()
+	  },
+	  methods:{
+		add(){},
+		getAllList(){ // 获取所有的品牌列表
+		  // 分析：
+		  // 1. 由于已经导入了 Vue-resource这个包，所以，可以直接通过 this.$http 来发起数据请求
+		  // 2. 根据接口API文档，直到，获取列表的时候，应该发起一个 get 请求
+		  // 3. this.$http.get('url').then(function(result){})
+		  // 4. 当通过 then 指定回调函数之后，在回调函数中，可以拿到数据服务器返回的 result
+		  // 5. 先判断 result.status 是否等于0，如果等于0，就成功了，可以把result.message 赋值给 this.list；如果不等于0，可以弹框提醒，获取数据失败
+		  this.$http.get('04小结.txt').then(result =>{
+	         // 注意：通过 $http 获取到的数据，都在 result.body 中放着
+	         var result = result.body
+			 if (result.status === 0) {
+				 // 成功了
+				 this.list = result.message
+			 }else{
+				 // 失败了
+				 alert('数据获取失败！')
+			 }
+		  })
+		}
+	  }
+  })	
+</script>
+</body>
+</html>

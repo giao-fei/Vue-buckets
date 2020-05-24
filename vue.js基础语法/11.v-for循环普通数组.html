@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>v-for循环普通数组</title>
+<script src="Vue包/vue-2.4.0.js"></script>
+</head>
+<body>
+ <div id="app">
+	<input type="button" @click="add" value="添加">
+	<input type="button" @click="del" value="移除">
+	 <!-- i为索引值 -->
+   <p v-for="(item,i) in list">{{i+1}}、{{item}}</p>
+   <h3 v-for="(item,i) in vegetables">{{item.name}}</h3>
+ </div>
+<script>
+ var vm = new Vue({
+	 el:'#app',
+	 data:{
+	   list: ["北京","上海","广州","深圳"],
+	   vegetables:[
+		   {name: "炒番茄"},
+		   {name: "炒肉丝"}
+	   ]  
+	 },
+	 methods:{
+	   add(){
+           this.vegetables.push({ name: "炒白菜"})
+	   },
+	   del(){
+           this.vegetables.shift();
+	   }	 
+	 }
+ });
+</script>
+</body>
+</html>

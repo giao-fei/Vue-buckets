@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="Vue包/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+       <img :src="imgArr[index]" v-for="(item, index) in imgArr">  
+    </div>
+<script>
+   var vm = new Vue({
+        el: "#app",
+        data: {
+          index:0,
+          imgArr: [
+              "./img/u204.jpg",
+              "./img/u212.jpg",
+              "./img/u216.jpg",
+              "./img/u220.jpg",
+              "./img/u228.jpg"
+          ]            
+        }
+    })
+</script>
+</body>
+</html>

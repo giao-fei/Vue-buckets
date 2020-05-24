@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片切换</title>
+<style>
+    #app{
+        width: 800px;
+        height: 500px;
+        margin: 50px auto;
+    }
+     .button{
+        position: relative;
+        top: -250px;
+    }
+     button{
+        position: absolute;
+    }
+    .left{
+        left: 0px;
+    }
+    .right{
+        right: 0px;
+    }
+    img{
+        width: 800px;
+        height: 500px;
+    }
+</style>
+</head>
+<body>
+<script src="Vue包/vue-2.4.0.js"></script>
+    <div id="app">
+    <img :src="imgArr[index]">        
+    <div class="button">
+        <!-- 左箭头 -->
+        <button @click='prev' v-show="index!=0" class="left"><</button>
+        <!-- 右箭头 -->
+        <button @click='next' v-show="index<imgArr.length-1" class="right">></button>
+    </div>
+    </div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data:{
+          index:0,
+          imgArr: [
+              "./img/u204.jpg",
+              "./img/u212.jpg",
+              "./img/u216.jpg",
+              "./img/u220.jpg",
+              "./img/u228.jpg"
+          ]
+        },
+        methods:{
+          prev:function(){
+              if(this.index>0){
+                this.index--;                  
+              }else{
+                 
+              }
+          },
+          next:function(){
+              if(this.index<4){
+              this.index++;
+              }else{
+
+              }
+          }
+        }
+    })
+</script>
+</body>
+</html>

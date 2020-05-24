@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通过代码跳转路由</title>
+</head>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<body>
+    <div id="app">
+      <button @click="reg">register</button>
+      <button @click="log">login</button>
+      <router-view></router-view>
+    </div>
+    <script>
+     // 创建路由组件构造器
+      const LOG = {template: '<div>我是login组件</div>'}
+      const REG = {template: '<div>我是register组件</div>'}
+     // 配置路由映射
+      const routes = [
+          {
+             path: '/login',
+             component: LOG
+          },
+          {
+             path: '/register',
+             component: REG
+          }
+      ]
+     // 注册路由组件
+      const router = new VueRouter({ 
+          mode: 'history',
+          base: process.env.BASE_URL,        
+          routes
+      })  
+      new Vue({
+           el: '#app',
+           data:{},
+           methods:{
+               reg(){
+                   this.$router.push('/register')
+               },
+               log(){
+                   this.$router.push('/login')
+               }
+           },
+           router
+       })
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态路由</title>
+</head>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<body>
+    <div id="app">
+        <router-link :to="'/login/' + name">login</router-link>
+        <router-link to="/register">register</router-link>
+        <router-view></router-view>
+    </div>
+    <template id="tmp">
+        <div>
+            <p>这是登录组件</p>
+            <p>{{name}}</p>
+        </div>
+    </template>
+    <script>
+        const LOG = { template: "#tmp" }
+        const REG = { template: "<div>这是注册组件</div>" }
+         
+        const routes = [
+            {
+              path: '/login/:name',
+              component: LOG
+            },
+            {
+              path: '/register',
+              component: REG
+            }
+        ]
+        // 注册路由组件
+        const router = new VueRouter({
+            routes
+        })
+        // 创建viewMode实例
+        new Vue({
+            el: '#app',
+            data: {
+                name: '动态路由'
+            },
+            router,
+            compouted: {
+                name(){
+                    return this.$route.params.name
+                }
+            }
+        })
+    </script>
+</body>
+</html>

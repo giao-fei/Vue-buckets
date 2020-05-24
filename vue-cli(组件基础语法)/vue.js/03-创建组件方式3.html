@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建组件方式2</title>
+<script src="../js/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <com1></com1>
+
+    </div>
+<script>
+    // 创建第一个组件构造器 
+    var com = Vue.extend({
+        template: `<div>hello world</div>`
+    })
+    // 创建第二个组件构造器
+    var com1 = Vue.extend({
+        template: `
+           <div>
+             <com></com>
+             <p>I am fine, thanks</p>             
+           </div>
+        `,
+        components: {
+            com: com
+        }
+    }) 
+    // 注册全局组件
+    // Vue.component("com1", com1)
+    
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        // 注册局部组件
+        components: {
+            com1: com1
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性的复杂操作</title>
+    <script src="./js/vue-2.4.0.js"></script>
+</head>
+<style>
+    .red{
+        color: red
+    }
+</style>
+<body>
+    <div id="app">
+     <ul>
+      <li :class="index == colin?'red':''" @click="button(index)" v-for='(item,index) in list'>{{AllPrice}}--{{index}}{{item.name}}</li>
+     </ul>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+              list: [
+                  {name: '葱烧海参', price: 20},
+                  {name: '红烧带鱼' ,price: 100},
+                  {name: '红烧排骨', price: 250},
+                  {name: '红烧狮子头', price: 300}
+              ],
+              colin:-1, 
+              msg: 'hello world',
+              active: ''
+            },
+            computed: {
+              AllPrice(){
+                let result = 0;
+                for(let i = 0; i < this.list.length; i++){
+                    result = this.list[i].price++
+                }
+                return result
+              }
+            },
+            methods:{
+                button(e){
+                    this.colin = e
+                },
+            }
+        })
+    </script>
+</body>
+</html>

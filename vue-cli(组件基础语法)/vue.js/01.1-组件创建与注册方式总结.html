@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件注册总结</title>
+<script src="../js/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <mycom1></mycom1>
+        <mycom2></mycom2>
+        <mycom3></mycom3>
+        <mycom4></mycom4>
+    </div>
+    <template id="tmp1">
+        <div>
+          hello world
+        </div>
+    </template>
+    <template id="tmp2">
+        <div>
+          I'm fine, thanks
+        </div>
+    </template>
+    <template id="tmp3">
+        <div>
+          No, I not fine
+        </div>
+    </template>
+    <template id="tmp4">
+        <div>
+          Oh, Me too  
+        </div>
+    </template>
+<script>
+    // 创建方式一 --> 原生方式
+    var com1 = Vue.extend({
+        template: "#tmp1"
+    })
+    // 创建方式二 --> 对象字面量
+    var mycom2 = {
+        template: "#tmp2"
+    }
+    // 创建方式三 --> 全局创建组件语法糖
+    Vue.component("mycom3",{
+        template: "#tmp3"
+    })
+
+    // 注册组件方式一
+    Vue.component('mycom1', com1);
+
+    // 创建 View 实例
+    var vm = new Vue({
+        el: "#app",
+        data:{},
+        methods:{},
+        components:{
+            // 注册组件方式一
+            // mycom1: com1,
+            // 注册组件方式二
+            mycom2,
+            // 创建方式四 --> 局部创建组件语法糖
+            "mycom4":{
+              template: "#tmp4" 
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<style>
+    .v-enter-active,
+		.v-leave-to{
+		   opacity: 0;
+		   transform: translateX(140px);	
+		}
+		.v-enter-active,
+		.v-leave-active{
+			transition: all 0.5s ease;
+		}
+    /* .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s;
+    } */
+    /* .fade-leave-active below version 2.1.8 */
+    /* .fade-enter, .fade-leave-to  {
+      opacity: 0;
+    } */
+</style>
+<body>
+    <div id="app">
+      <router-link to="/go" tag="button" replace>go</router-link>
+      <router-link to="/pre" tag="button" replace>pre</router-link>
+
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
+    </div>
+
+    <script>
+       // 创建了两个标签页 创建组件构造器
+       const GO = { template: '<div>hello world</div>' }
+       const PRE = { template: '<div>I am fine , thanks</div>' }
+       // 配置路由映射    
+       const routes = [
+           {
+               path: '/go',
+               component: GO
+           },
+           {
+               path: '/pre',
+               component: PRE
+           }
+       ]
+    // 注册路由组件
+       const router = new VueRouter({       
+           routes
+       })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            router
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由嵌套</title>
+</head>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<body>
+    <div id="app">
+        <router-link to="/login" replace>login</router-link>
+        <router-link to="/register" replace>register</router-link>
+        <router-view></router-view>
+    </div>
+    <template id="tmp">
+        <div> 
+            <p>我是register组件</p>
+            <router-link to="/forget">forget</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+    <script>
+        const LOG = { template: '<div>hello world</div>' }
+        const REG = { template: "#tmp" }
+        const FORGET = { template: '<div>我是register的子组件</div>' }
+        // 注册并配置路由映射
+        const routes = [
+            { 
+              path: '/login',
+              component: LOG
+            },
+            {
+              path: '/register',
+              component: REG,
+               children: [
+                   {
+                      path: '/forget',
+                      component: FORGET,
+                   }
+               ]
+            }
+        ]
+        // 注册路由组件
+        const router = new VueRouter({
+            routes
+        })
+        // 创建viewMode实例
+        new Vue({
+            el: '#app',
+            data:{},
+            router
+        })
+    </script>
+</body>
+</html>

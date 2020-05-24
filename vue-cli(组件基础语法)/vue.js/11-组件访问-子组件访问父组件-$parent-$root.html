@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>子组件访问父组件-$parent-$root</title>
+    <script src="../js/vue-2.4.0.js"></script>
+</head>
+<body>
+<!-- 父组件模板 -->
+    <div id="app">
+      <com></com>
+    </div>
+<!-- 子组件模板 -->
+<template id="tmp">
+    <div>
+      <button @click="btnClick">click</button>
+    </div>
+</template>
+<script>
+    // 父组件
+    var vm = new Vue({
+        el: "#app",
+        data: {
+           mes: "hello world"
+        },
+        methods: {
+           messhow(){
+              console.log("I'm fine thank you!")
+           }
+        },
+        components: {
+          com: {
+            template: "#tmp",
+            methods: {
+              btnClick(){
+                console.log(this.$parent.mes)
+                this.$parent.messhow();  
+              }
+            }
+          }
+
+        }
+    })
+</script>
+</body>
+</html>

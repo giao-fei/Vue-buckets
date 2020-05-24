@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父访问子组件-children</title>
+<script src="../js/vue-2.4.0.js"></script>
+</head>
+<body>
+
+    <!-- 利用 $children、$refs让父组件访问子组件里面的 方法、数据等 -->
+
+    <div id="app">
+        <com ref="ref"></com>
+        <p id="msg">{{msg}}</p>
+        <button @click="btn">单击</button>       
+    </div>
+    <template id="tmp">
+        <div>
+        </div>
+    </template>
+<script>
+    // 子组件
+    var com = {
+        template: "#tmp",
+        data(){
+            return {
+                name: "I'm fine thanks"  
+            }
+        },
+        methods: {
+            showMessage(){
+                console.log('hello world')
+            }
+        }
+    }
+
+    // 父组件
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "How are you"
+        },
+        components: {
+            com
+        },
+        methods:{
+            btn(){
+            // 1、利用 $children 拿到子组件里面的 方法 
+            // this.$children[0].showMessage()
+
+            // 利用 $refs拿到子组件里面的 data 和 方法
+            //   console.log(this.$refs.ref.name);
+              document.getElementById("msg").innerText = this.$refs.ref.name;
+              this.$refs.ref.showMessage();
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

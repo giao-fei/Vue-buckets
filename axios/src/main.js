@@ -4,14 +4,18 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+<<<<<<< HEAD
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:8080'
 axios.defaults.timeout = 5000
 
+=======
+>>>>>>> cb33a67f16f0053b5a66656377700fbcfa6090f8
 new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+<<<<<<< HEAD
 
 // 1、axios的基本使用
 // axios({
@@ -60,3 +64,5 @@ request({
 }).catch(err => {
    console.log(err)
 })
+=======
+>>>>>>> cb33a67f16f0053b5a66656377700fbcfa6090f8

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>计算属性的基本使用</title>
+	<script src="js/vue-2.4.0.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{fullname}}
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data:{
+               fistername: 'hello',
+			   secondname: 'world'
+			},
+			computed:{
+               fullname(){
+				   return this.fistername + this.secondname
+			   }
+			}
+		})
+	</script>
+</body>
+</html>
